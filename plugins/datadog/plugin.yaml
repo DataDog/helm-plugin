@@ -7,9 +7,9 @@ sourceURL: https://github.com/DataDog/helm-plugin
 config:
   ignoreFlags: false
   usage: datadog
-  shortHelp: helm-plugin is a helm plugin to alter rendered charts, add location annotations to all resource manifests.
+  shortHelp: helm-datadog is a helm plugin to alter rendered charts, add location annotations to all resource manifests.
   longHelp: |
-    helm-plugin is a helm plugin to alter rendered charts, add location annotations to all resource manifests.
+    helm-datadog is a helm plugin to alter rendered charts, add location annotations to all resource manifests.
 
     For more information, see the README.md at https://github.com/datadog/helm-plugin
 
@@ -23,7 +23,7 @@ config:
 
     Available Options:
       --help                                           -h  Show help
-      --version                                        -v  Display version of helm-plugin
+      --version                                        -v  Display version of helm-datadog
 
 runtimeConfig:
   platformCommand: # Configure command to run based on the platform

@@ -10,7 +10,7 @@ HELM_BIN=${HELM_BIN:-$(helm env HELM_BIN)}
 # Path to current directory
 SCRIPT_DIR="${HELM_PLUGIN_DIR}/scripts"
 PLUGIN_BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-POST_RENDERER_BIN="${PLUGIN_BIN_DIR}/../bin/helm-plugin"
+POST_RENDERER_BIN="${PLUGIN_BIN_DIR}/../bin/helm-datadog"
 
 PLUGIN_YAML=${HELM_PLUGIN_DIR}/plugin.yaml
 PLUGIN_TYPE=""

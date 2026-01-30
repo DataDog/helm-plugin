@@ -4,8 +4,8 @@
 SHELL = /bin/bash -e
 
 # Helm plugin
-HELM_PLUGIN_MAIN := ./cmd/helm-plugin/main.go
-HELM_PLUGIN_BIN := ./bin/helm-plugin
+HELM_PLUGIN_MAIN := ./cmd/helm-datadog/main.go
+HELM_PLUGIN_BIN := ./bin/helm-datadog
 
 # Kubectl datadog plugin
 KUBECTL_DATADOG_MAIN := ./cmd/kubectl-datadog/main.go
@@ -65,7 +65,7 @@ install4:
 install4loc: build
 	helm plugin install $(HELM4_PLUGIN_PATH)/datadog --verify=false
 	helm plugin install $(HELM4_PLUGIN_PATH)/datadog-post-renderer --verify=false
-	cp $(HELM_PLUGIN_BIN) ./plugins/datadog-post-renderer/bin/helm-plugin
+	cp $(HELM_PLUGIN_BIN) ./plugins/datadog-post-renderer/bin/helm-datadog
 
 .PHONY: vet
 vet: ## Runs go vet

@@ -14,7 +14,7 @@ The plugin supports:
 
 ### Build
 ```bash
-make build              # Build both helm-plugin and kubectl-datadog binaries
+make build              # Build both helm-datadog and kubectl-datadog binaries
 ```
 
 ### Testing
@@ -54,7 +54,7 @@ make install4loc        # Install local Helm 4 plugins in devmode (locally)
 
 The plugin operates in two modes depending on the tool being used:
 
-1. **Helm Mode** (`cmd/helm-plugin`): Acts as a Helm post-renderer
+1. **Helm Mode** (`cmd/helm-datadog`): Acts as a Helm post-renderer
    - Invoked via `helm datadog <command>`
    - Wraps Helm commands and injects itself as `--post-renderer`
    - Processes rendered manifests through stdin/stdout
@@ -124,7 +124,7 @@ Version string format: `v{3,4}/{plugin-version}` (e.g., "v3/0.1.1" or "v4/0.1.1"
 
 **Helm 3** (single plugin):
 - `plugin.yaml` at repo root
-- Single binary: `bin/helm-plugin`
+- Single binary: `bin/helm-datadog`
 - Script wrapper: `scripts/main.sh`
 
 **Helm 4** (split plugins):
@@ -133,7 +133,7 @@ Version string format: `v{3,4}/{plugin-version}` (e.g., "v3/0.1.1" or "v4/0.1.1"
   - Delegates to `datadog-post-renderer` plugin for actual rendering
 - `plugins/datadog-post-renderer/` - Post-renderer plugin (type: postrenderer/v1)
   - Invoked by Helm as subprocess
-  - Contains actual `bin/helm-plugin` binary
+  - Contains actual `bin/helm-datadog` binary
 
 ## Integration Tests
 

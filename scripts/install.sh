@@ -34,7 +34,7 @@ if [[ ${pluginType} != "" && ! ${pluginType} =~ "postrenderer/"* ]]; then
     exit 0
 fi
 
-echo "Downloading and installing helm-plugin v${version} ..."
+echo "Downloading and installing helm-datadog v${version} ..."
 
 PROJECT_NAME="helm-plugin"
 PROJECT_GH="DataDog/${PROJECT_NAME}"
@@ -137,7 +137,7 @@ install_file() {
     mkdir -p "$HELM_PLUGIN_DIR/bin"
     cp "$HELM_TMP_BIN" "$HELM_PLUGIN_DIR/bin"
 
-    echo "helm-plugin ${version} is installed."
+    echo "helm-datadog ${version} is installed."
     echo "Happy Helming!"
 }
 

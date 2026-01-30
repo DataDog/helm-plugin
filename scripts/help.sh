@@ -5,7 +5,7 @@ set -euf
 help_usage() {
     cat <<'EOF'
 
-helm-plugin is a helm plugin for annotating helm charts with location information.
+helm-datadog is a helm plugin for annotating helm charts with location information.
 
 For more information, see the README.md at https://github.com/datadog/helm-plugin
 
@@ -19,6 +19,6 @@ Available Commands:
 
 Available Options:
   --help                                           -h  Show help
-  --version                                        -v  Display version of helm-plugin
+  --version                                        -v  Display version of helm-datadog
 EOF
 }

@@ -1,0 +1,25 @@
+version: 2
+
+builds:
+  - id: helm-datadog
+    main: ./cmd/helm-datadog
+    binary: helm-datadog
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+  - id: kubectl-datadog
+    main: ./cmd/kubectl-datadog
+    binary: kubectl-datadog
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+

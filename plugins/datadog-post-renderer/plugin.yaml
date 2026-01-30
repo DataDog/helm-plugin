@@ -7,9 +7,9 @@ sourceURL: https://github.com/DataDog/helm-plugin
 runtimeConfig:
   platformCommand: # Configure command to run based on the platform
     - os: linux
-      command: "$HELM_PLUGIN_DIR/bin/helm-plugin"
+      command: "$HELM_PLUGIN_DIR/bin/helm-datadog"
     - os: darwin
-      command: "$HELM_PLUGIN_DIR/bin/helm-plugin"
+      command: "$HELM_PLUGIN_DIR/bin/helm-datadog"
   platformHooks:
     install:
       - command: ${HELM_PLUGIN_DIR}/scripts/install.sh

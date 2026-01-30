@@ -69,8 +69,8 @@ prepare_expected_file() {
     local plugin_version=$3
 
     # Replace targetRevision with current git hash, then replace plugin version
-    sed "s/\"targetRevision\":\"[^\"]*\"/\"targetRevision\":\"${CURRENT_GIT_HASH}\"/" "${source_file}" |
-        sed "s/v3\/[0-9.][0-9.]*/v3\/${plugin_version}/g; s/v4\/[0-9.][0-9.]*/v4\/${plugin_version}/g" >"${dest_file}"
+    sed "s/\"targetRevision\":\"[^\"]*\"/\"targetRevision\":\"${CURRENT_GIT_HASH}\"/" "${source_file}" | \
+        sed "s/v3\/[0-9.][0-9.]*/v3\/${plugin_version}/g; s/v4\/[0-9.][0-9.]*/v4\/${plugin_version}/g" > "${dest_file}"
 }
 
 # Test Helm v3 integration for one file
@@ -105,13 +105,13 @@ test_helm_v3_integration() {
         bash "${HELM_PLUGIN_DIR}/scripts/main.sh" template test-release "${chart_dir}" >"${output_manifest}" 2>&1 || true
 
     if [[ -f "${helm_output_file}" ]]; then
-        # Check that post-renderer binary path is correct (should be full path to bin/helm-plugin)
+        # Check that post-renderer binary path is correct (should be full path to bin/helm-datadog)
         local post_renderer_bin=$(grep "POST_RENDERER_BIN:" "${helm_output_file}" | cut -d' ' -f2-)
 
-        if [[ "${post_renderer_bin}" == *"/bin/helm-plugin" ]]; then
+        if [[ "${post_renderer_bin}" == *"/bin/helm-datadog" ]]; then
             print_result "Helm v3: post-renderer binary path" "pass" ""
         else
-            print_result "Helm v3: post-renderer binary path" "fail" "Expected path ending with /bin/helm-plugin, got: ${post_renderer_bin}"
+            print_result "Helm v3: post-renderer binary path" "fail" "Expected path ending with /bin/helm-datadog, got: ${post_renderer_bin}"
         fi
 
         # Check that post-renderer-args contains version
@@ -183,7 +183,7 @@ test_helm_v4_integration() {
     local mock_post_renderer="${test_dir}/datadog-post-renderer"
     cat >"${mock_post_renderer}" <<'MOCKEOF'
 #!/usr/bin/env bash
-exec REPO_ROOT/bin/helm-plugin "$@"
+exec REPO_ROOT/bin/helm-datadog "$@"
 MOCKEOF
     sed -i.bak "s|REPO_ROOT|${REPO_ROOT}|g" "${mock_post_renderer}"
     rm "${mock_post_renderer}.bak"
@@ -250,20 +250,20 @@ MOCKEOF
 test_chart_rendering() {
     echo -e "\n${YELLOW}Running Chart Rendering Tests${NC}"
 
-    # This test would require the actual helm-plugin binary to run
+    # This test would require the actual helm-datadog binary to run
     # For now, we'll create a placeholder test
 
-    if [ ! -x "${REPO_ROOT}/bin/helm-plugin" ]; then
+    if [ ! -x "${REPO_ROOT}/bin/helm-datadog" ]; then
         make build
     fi
 
-    print_result "helm-plugin binary exists" "pass" ""
+    print_result "helm-datadog binary exists" "pass" ""
 
     # Test that binary can be executed
-    if "${REPO_ROOT}/bin/helm-plugin" --help >/dev/null 2>&1; then
-        print_result "helm-plugin binary executable" "pass" ""
+    if "${REPO_ROOT}/bin/helm-datadog" --help >/dev/null 2>&1; then
+        print_result "helm-datadog binary executable" "pass" ""
     else
-        print_result "helm-plugin binary executable" "fail" "Binary failed to execute"
+        print_result "helm-datadog binary executable" "fail" "Binary failed to execute"
     fi
 }
 
