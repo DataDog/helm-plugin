@@ -11,8 +11,8 @@ import (
 	"log/slog"
 	"os"
 
-	"datadog.com/helm-annotate/pkg/helmdriver"
-	"datadog.com/helm-annotate/pkg/log"
+	"datadog.com/helm-plugin/pkg/helmdriver"
+	"datadog.com/helm-plugin/pkg/log"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module datadog.com/helm-annotate
+module datadog.com/helm-plugin
 
 go 1.25.5
 

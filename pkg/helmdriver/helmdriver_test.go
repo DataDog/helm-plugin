@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"datadog.com/helm-annotate/pkg/git"
+	"datadog.com/helm-plugin/pkg/git"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

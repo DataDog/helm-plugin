@@ -10,8 +10,8 @@ import (
 	"log/slog"
 	"os"
 
-	"datadog.com/helm-annotate/pkg/kubectldriver"
-	"datadog.com/helm-annotate/pkg/log"
+	"datadog.com/helm-plugin/pkg/kubectldriver"
+	"datadog.com/helm-plugin/pkg/log"
 	"github.com/spf13/cobra"
 )
 
