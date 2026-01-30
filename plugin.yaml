@@ -1,0 +1,17 @@
+name: "datadog"
+version: 0.1.2
+usage: "Add location annotation to all resources in the chart before applying"
+description: |-
+  DataDog helm plugin to alter rendered charts, add location annotations to all resource manifests
+  https://github.com/DataDog/helm-plugin
+ignoreFlags: false
+platformCommand:
+  - os: linux
+    command: "$HELM_PLUGIN_DIR/scripts/main.sh"
+  - os: darwin
+    command: "$HELM_PLUGIN_DIR/scripts/main.sh"
+platformHooks:
+  install:
+    - command: ${HELM_PLUGIN_DIR}/scripts/install.sh
+  update:
+    - command: ${HELM_PLUGIN_DIR}/scripts/install.sh

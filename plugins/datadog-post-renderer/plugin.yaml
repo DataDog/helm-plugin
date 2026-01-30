@@ -1,0 +1,17 @@
+apiVersion: v1
+type: postrenderer/v1
+name: datadog-post-renderer
+version: 0.1.2
+runtime: subprocess
+sourceURL: https://github.com/DataDog/helm-plugin
+runtimeConfig:
+  platformCommand: # Configure command to run based on the platform
+    - os: linux
+      command: "$HELM_PLUGIN_DIR/bin/helm-plugin"
+    - os: darwin
+      command: "$HELM_PLUGIN_DIR/bin/helm-plugin"
+  platformHooks:
+    install:
+      - command: ${HELM_PLUGIN_DIR}/scripts/install.sh
+    update:
+      - command: ${HELM_PLUGIN_DIR}/scripts/install.sh

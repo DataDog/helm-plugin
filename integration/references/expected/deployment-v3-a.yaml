@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations:
+        datadoghq.com/test-annotations: helm-test
+        origin.datadoghq.com/location: '{"helm":{"repoURL":"https://github.com/DataDog/helm-plugin","targetRevision":"766d0a9c4d5da6382e1ed757129d4326a31cc964","chartPath":"chart/dir/dummy"}}'
+        origin.datadoghq.com/plugin-version: v3/0.1.1
+    labels:
+        app: test-app
+        app.kubernetes.io/instance: test-release
+    name: test-app
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: test-app
+    template:
+        metadata:
+            labels:
+                app: test-app
+        spec:
+            containers:
+                - image: nginx:1.21
+                  imagePullPolicy: IfNotPresent
+                  name: test-app
+                  ports:
+                    - containerPort: 80
+                      name: http
+                      protocol: TCP

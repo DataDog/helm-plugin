@@ -1,0 +1,31 @@
+apiVersion: v1
+data:
+    key1: value1
+    key2: value2
+kind: ConfigMap
+metadata:
+    annotations:
+        origin.datadoghq.com/location: '{"repo":{"url":"https://github.com/explicit/repo","targetRevision":"cmtsha","path":"custom/path"}}'
+    name: my-config
+    namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations:
+        origin.datadoghq.com/location: '{"repo":{"url":"https://github.com/explicit/repo","targetRevision":"cmtsha","path":"custom/path"}}'
+    name: my-app
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: my-app
+    template:
+        metadata:
+            labels:
+                app: my-app
+        spec:
+            containers:
+                - image: nginx:latest
+                  name: my-app

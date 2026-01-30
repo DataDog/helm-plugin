@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: valid-config
+data:
+  key: value
+---
+this is not valid yaml: [
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: another-valid-config
+data:
+  key: value
+
