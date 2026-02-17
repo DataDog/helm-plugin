@@ -17,7 +17,7 @@ HELM4_PLUGIN_PATH = ./plugins/
 VERSION := $(shell grep "version" plugin.yaml | head -n 1 | cut -d ':' -f 2 | tr -d '" ')
 
 .PHONY: ci
-ci: build test vet test-integration ## Runs build test vet and integration tests in CI
+ci: build vet test-all ## Runs build test vet and integration tests in CI
 	@echo "CI done"
 
 .PHONY: build
