@@ -1,10 +1,7 @@
 # About
 
 Datadog is a helm plugin to annotate deployments with datadog specific annotation
-to map deployed resource to their location.
-
-TODO!!!!!!!!!!!!: add the link to public doc.
-https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githubsaasonprem#kubernetes-source-code-and-resource-mapping
+to map deployed resource to their location. You can read more about it in the [documentation](https://docs.datadoghq.com/source_code/resource-mapping/?tab=rawkubernetesyaml).
 
 # Helm 4 Plugin installation
 
