@@ -1,10 +1,7 @@
 # About
 
 Datadog is a helm plugin to annotate deployments with datadog specific annotation
-to map deployed resource to their location.
-
-TODO!!!!!!!!!!!!: add the link to public doc.
-https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githubsaasonprem#kubernetes-source-code-and-resource-mapping
+to map deployed resource to their location. You can read more about it in the [documentation](https://docs.datadoghq.com/source_code/resource-mapping/?tab=rawkubernetesyaml).
 
 # Helm 4 Plugin installation
 
@@ -15,8 +12,10 @@ datadog-post-renderer: A plugin that adds annotations in post-rendering.
 
 Both plugins needs to be installed using following commands (note verification is enabeld):
 
-`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-0.1.1.tgz`
-`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-post-renderer-0.1.1.tgz`
+`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-0.1.1.tgz --verify=false`
+`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-post-renderer-0.1.1.tgz --verify=false`
+
+Note that verification is disabled for now, but we are working on enabling it.
 
 Please check latest release version here: `https://github.com/DataDog/helm-plugin/releases`
 
