@@ -91,12 +91,6 @@ rm_temp_dir() {
     fi
 }
 
-# NOTE: This is needed until we make repo public
-ghdownload() {
-    gh release download v"${version}" -p $1
-    mv "$1" "${HELM_TMP}"/
-}
-
 # downloadFiles downloads the latest binary package and also the checksum
 # for that binary.
 download_files() {
@@ -106,14 +100,10 @@ download_files() {
     DOWNLOAD_URL_FILE="${HELM_TMP}/$(basename "${DOWNLOAD_URL}")"
     CHECKSUM_URL_FILE="${HELM_TMP}/$(basename "${CHECKSUM_URL}")"
 
-    # https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/helm-plugin_0.1.1_darwin_arm64.tar.gz
-
     echo "Downloading ${DOWNLOAD_URL}"
     if command -v curl >/dev/null 2>&1; then
-        # curl -sSf -L "${DOWNLOAD_URL}" -o "${DOWNLOAD_URL_FILE}"
-        # curl -sSf -L "${CHECKSUM_URL}" -o "${CHECKSUM_URL_FILE}"
-        ghdownload $(basename "${DOWNLOAD_URL}")
-        ghdownload $(basename "${CHECKSUM_URL}")
+        curl -sSf -L "${DOWNLOAD_URL}" -o "${DOWNLOAD_URL_FILE}"
+        curl -sSf -L "${CHECKSUM_URL}" -o "${CHECKSUM_URL_FILE}"
     elif command -v wget >/dev/null 2>&1; then
         wget -q "${DOWNLOAD_URL}" -O "${DOWNLOAD_URL_FILE}"
         wget -q "${CHECKSUM_URL}" -O "${CHECKSUM_URL_FILE}"
