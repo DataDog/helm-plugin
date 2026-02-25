@@ -12,8 +12,10 @@ datadog-post-renderer: A plugin that adds annotations in post-rendering.
 
 Both plugins needs to be installed using following commands (note verification is enabeld):
 
-`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-0.1.1.tgz`
-`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-post-renderer-0.1.1.tgz`
+`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-0.1.1.tgz --verify=false`
+`helm plugin install https://github.com/DataDog/helm-plugin/releases/download/v0.1.1/datadog-post-renderer-0.1.1.tgz --verify=false`
+
+Note that verification is disabled for now, but we are working on enabling it.
 
 Please check latest release version here: `https://github.com/DataDog/helm-plugin/releases`
 
