@@ -10,8 +10,8 @@ import (
 	"log/slog"
 	"os"
 
-	"datadog.com/helm-plugin/pkg/kubectldriver"
-	"datadog.com/helm-plugin/pkg/log"
+	"github.com/DataDog/helm-plugin/pkg/kubectldriver"
+	"github.com/DataDog/helm-plugin/pkg/log"
 	"github.com/spf13/cobra"
 )
 

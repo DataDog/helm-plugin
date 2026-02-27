@@ -12,8 +12,8 @@ import (
 	"log/slog"
 	"os"
 
-	"datadog.com/helm-plugin/pkg/annotator"
-	"datadog.com/helm-plugin/pkg/git"
+	"github.com/DataDog/helm-plugin/pkg/annotator"
+	"github.com/DataDog/helm-plugin/pkg/git"
 )
 
 var _ Driver = (*driver)(nil)

@@ -1,5 +1,4 @@
 "component","origin","license","copyright"
-"datadog.com/helm-plugin","https://datadog.com/helm-plugin","[]","[]"
 "github.com/DataDog/helm-plugin","https://github.com/DataDog/helm-plugin","['Apache-2.0']","['DataDog']"
 "github.com/davecgh/go-spew","https://github.com/davecgh/go-spew","['ISC']","['davecgh']"
 "github.com/fxamacker/cbor/v2","https://github.com/fxamacker/cbor","['MIT']","['fxamacker']"

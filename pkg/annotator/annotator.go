@@ -11,7 +11,7 @@ import (
 	"io"
 	"os"
 
-	"datadog.com/helm-plugin/pkg/log"
+	"github.com/DataDog/helm-plugin/pkg/log"
 	"go.yaml.in/yaml/v3"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )

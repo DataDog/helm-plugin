@@ -15,8 +15,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"datadog.com/helm-plugin/pkg/annotator"
-	"datadog.com/helm-plugin/pkg/git"
+	"github.com/DataDog/helm-plugin/pkg/annotator"
+	"github.com/DataDog/helm-plugin/pkg/git"
 	"go.yaml.in/yaml/v3"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )
