@@ -1,4 +1,4 @@
-module datadog.com/helm-plugin
+module github.com/DataDog/helm-plugin
 
 go 1.25.5
 
