@@ -122,7 +122,7 @@ download_files() {
 # installs it.
 install_file() {
     tar xzf "$DOWNLOAD_URL_FILE" -C "$HELM_TMP"
-    HELM_TMP_BIN="$HELM_TMP/helm-plugin"
+    HELM_TMP_BIN="$HELM_TMP/helm-datadog"
     echo "Preparing to install into ${HELM_PLUGIN_DIR}"
     mkdir -p "$HELM_PLUGIN_DIR/bin"
     cp "$HELM_TMP_BIN" "$HELM_PLUGIN_DIR/bin"
