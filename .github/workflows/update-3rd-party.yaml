@@ -79,6 +79,8 @@ jobs:
               git config --local user.email "action@github.com"
               git config --local user.name "GitHub Action"
 
+              git switch ${GITHUB_HEAD_REF}
+
               git add LICENSE-3rdparty.csv
               git commit -m "Update LICENSE-3rdparty.csv"
 
