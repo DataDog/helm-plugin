@@ -1,0 +1,5 @@
+
+default:
+  retry:
+    max: 1 # Retry everything once on failure
+    when: always
