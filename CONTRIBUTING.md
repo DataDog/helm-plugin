@@ -53,6 +53,12 @@ This repository includes an [AGENTS.md](https://agents.md/) that your AI code as
 
 To update 3rd party license file use [dd-license-attribution](https://github.com/DataDog/dd-license-attribution)
 
+You can use the following command: 
+
+`dd-license-attribution generate-sbom-csv --github-token <token> https://github.com/DataDog/helm-plugin > LICENSE-3rdparty.csv`
+
+Please check that tool didn't omit any licences of existing packages.
+
 ## Contributing to issues
 
 ### Contributing to reporting bugs
