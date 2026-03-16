@@ -1,0 +1,42 @@
+default:
+  retry:
+    max: 1 # Retry everything once on failure
+    when: always
+
+stages:
+  - build
+  - test
+
+# Workflow rules
+# Rules used to define whether a pipeline should run, and with which variables
+#
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "web"
+
+variables:
+  GOPATH: $CI_PROJECT_DIR/.go
+
+.go-cache:
+  cache:
+    key: go-mod-$CI_COMMIT_REF_SLUG
+    paths:
+      - .go/pkg/mod/
+
+build:
+  extends: .go-cache
+  stage: build
+  image: golang:1.25.5
+  script:
+    - make build
+
+test-all:
+  extends: .go-cache
+  stage: test
+  image: golang:1.25.5
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq shellcheck
+  script:
+    - make ci
