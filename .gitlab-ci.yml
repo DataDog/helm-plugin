@@ -6,6 +6,7 @@ default:
 stages:
   - build
   - test
+  - package
 
 # Workflow rules
 # Rules used to define whether a pipeline should run, and with which variables
@@ -25,12 +26,14 @@ variables:
     paths:
       - .go/pkg/mod/
 
+
 build:
   extends: .go-cache
   stage: build
   image: golang:1.25.5
   script:
     - make build
+
 
 test-all:
   extends: .go-cache
@@ -40,3 +43,15 @@ test-all:
     - apt-get update -qq && apt-get install -y -qq shellcheck
   script:
     - make ci
+
+package:
+  variables:
+    VAULT_ADDR: "???????"
+    VAULT_TOKEN: "!!!!!!!"
+  id_tokens:
+    CI_IDENTITIES_GITLAB_ID_TOKEN:
+      aud: ci-identities
+  stage: package
+  script:
+    - make install-packager
+    - make package-ci

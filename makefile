@@ -97,5 +97,16 @@ clean: ## Clean local binaries
 	@rm -rf ./bin/
 	@rm -rf ./plugins/datadog-post-renderer/bin
 
+install-packager:
+	git clone https://github.com/DataDog/software-integrity-and-trust.git pkgtool
+	cd pkgtool/sint-4674-helm-plugin-build-and-release && go build -o dist/helm-plugin-sign ./cmd/cli
+
+package-ci:
+	pkgtool/sint-4674-helm-plugin-build-and-release/dist/helm-plugin-sign package ./plugins/datadog \
+	--vault-key my-transit-engine/keys/plugin-signing-key \
+	--user-id "Helm Plugin Signer" \
+	--user-email "signer@example.com" \
+	--output ./dist
+
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
