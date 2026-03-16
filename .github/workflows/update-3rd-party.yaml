@@ -58,8 +58,6 @@ jobs:
         run: |
           dd-license-attribution generate-sbom-csv \
             --use-mirrors=mirrors.json \
-            --no-scancode-strategy \
-            --no-github-sbom-strategy \
             "${REPOSITORY_URL}" > LICENSE-3rdparty.csv
 
       - name: Run LICENSE-3rdparty.csv update check
