@@ -1,4 +1,5 @@
 default:
+  tags: ["arch:amd64"]
   retry:
     max: 1 # Retry everything once on failure
     when: always
@@ -19,26 +20,28 @@ workflow:
 
 variables:
   GOPATH: $CI_PROJECT_DIR/.go
+  GO_VERSION: "1.25.8"
+  CI_IMAGE_GBI_JAMMY: registry.ddbuild.io/ci/dd-go:gbi-jammy@sha256:27a9faecce3ef65bf9879a0ae2de80e0791dbd1191213188c46bb77ee9fab78e
 
 .go-cache:
   cache:
-    key: go-mod-$CI_COMMIT_REF_SLUG
+    key: go-mod-$CI_COMMIT_REF_SLUG-$GO_VERSION
     paths:
       - .go/pkg/mod/
-
+    fallback_keys:
+      - go-modules-prod-${GO_VERSION}
 
 build:
   extends: .go-cache
   stage: build
-  image: golang:1.25.5
+  image: $CI_IMAGE_GBI_JAMMY
   script:
     - make build
-
 
 test-all:
   extends: .go-cache
   stage: test
-  image: golang:1.25.5
+  image: $CI_IMAGE_GBI_JAMMY
   before_script:
     - apt-get update -qq && apt-get install -y -qq shellcheck
   script:
