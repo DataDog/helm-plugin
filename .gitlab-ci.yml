@@ -55,7 +55,7 @@ package:
     CI_IDENTITIES_GITLAB_ID_TOKEN:
       aud: ci-identities
   stage: package
-  image: "registry.ddbuild.io/ci-identities/ci-identities-gitlab-job-client"
+  image: $CI_IMAGE_GBI_JAMMY
   script:
     - ci-identities-gitlab-job-client --help
     - make install-packager
