@@ -98,8 +98,9 @@ clean: ## Clean local binaries
 	@rm -rf ./plugins/datadog-post-renderer/bin
 
 install-packager:
-	git clone https://github.com/DataDog/software-integrity-and-trust.git pkgtool
-	cd pkgtool/sint-4674-helm-plugin-build-and-release && go build -o dist/helm-plugin-sign ./cmd/cli
+	go install github.com/DataDog/software-integrity-and-trust/sint-4674-helm-plugin-build-and-release
+	#git clone https://github.com/DataDog/software-integrity-and-trust.git pkgtool
+	#cd pkgtool/sint-4674-helm-plugin-build-and-release && go build -o dist/helm-plugin-sign ./cmd/cli
 
 package-ci:
 	pkgtool/sint-4674-helm-plugin-build-and-release/dist/helm-plugin-sign package ./plugins/datadog \
