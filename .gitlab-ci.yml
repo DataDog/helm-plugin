@@ -55,6 +55,7 @@ package:
     CI_IDENTITIES_GITLAB_ID_TOKEN:
       aud: ci-identities
   stage: package
+  image: $CI_IMAGE_GBI_JAMMY
   script:
     - make install-packager
     - make package-ci
