@@ -57,6 +57,7 @@ package:
   stage: package
   image: $CI_IMAGE_GBI_JAMMY
   script:
+    - uname -a
     - ci-identities-gitlab-job-client --help
     - make install-packager
     - make package-ci
