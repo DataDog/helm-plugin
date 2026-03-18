@@ -26,7 +26,7 @@ TEST_REFS_DIR="${SCRIPT_DIR}/references"
 
 # Get current git hash and repo URL for substitution in expected files
 CURRENT_GIT_HASH=$(cd "${REPO_ROOT}" && git rev-parse HEAD)
-CURRENT_REPO_URL=$(cd "${REPO_ROOT}" && git remote get-url origin | sed 's/\.git$//')
+CURRENT_REPO_URL=$(cd "${REPO_ROOT}" && git remote get-url origin | sed 's/\.git$//' | sed 's/^http\:/https\:/')
 
 # Stop execution on any error
 trap "cleanup" EXIT
