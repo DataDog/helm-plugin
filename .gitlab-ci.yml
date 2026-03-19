@@ -22,6 +22,8 @@ variables:
   GOPATH: $CI_PROJECT_DIR/.go
   GO_VERSION: "1.25.8"
   CI_IMAGE_GBI_JAMMY: registry.ddbuild.io/ci/dd-go:gbi-jammy@sha256:27a9faecce3ef65bf9879a0ae2de80e0791dbd1191213188c46bb77ee9fab78e
+  CI_IDENTITIES_VERSION: 0.6.1
+  CI_IDENTITIES_URI: s3://binaries-ddbuild-io-prod/ci-identities/ci-identities-gitlab-job-client/versions/v${CI_IDENTITIES_VERSION}/ci-identities-gitlab-job-client-linux-amd64
 
 .go-cache:
   cache:
@@ -57,7 +59,8 @@ package:
   stage: package
   image: $CI_IMAGE_GBI_JAMMY
   script:
-    - uname -a
-    - ci-identities-gitlab-job-client --help
+    - aws s3 cp ${CI_IDENTITIES_URI} ./ci-identities-gitlab-job-client
+    - chmod u+x ./ci-identities-gitlab-job-client
+    # - ./ci-identities-gitlab-job-client secrets read "helm-plugin-gpg" "key"
     - make install-packager
     - make package-ci
