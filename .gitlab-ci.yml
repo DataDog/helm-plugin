@@ -51,9 +51,9 @@ test-all:
     - make ci
 
 package:
-  variables:
-    VAULT_ADDR: "???????"
-    VAULT_TOKEN: "!!!!!!!"
+  # variables:
+    # VAULT_ADDR: "???????"
+    # VAULT_TOKEN: "!!!!!!!"
   id_tokens:
     CI_IDENTITIES_GITLAB_ID_TOKEN:
       aud: ci-identities
