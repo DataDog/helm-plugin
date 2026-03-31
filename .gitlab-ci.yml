@@ -51,8 +51,8 @@ test-all:
     - make ci
 
 package:
-  # variables:
-    # VAULT_ADDR: "???????"
+  variables:
+    VAULT_ADDR: "https://vault.us1.ddbuild.io"
     # VAULT_TOKEN: "!!!!!!!"
   id_tokens:
     CI_IDENTITIES_GITLAB_ID_TOKEN:
@@ -64,8 +64,8 @@ package:
   script:
     - aws s3 cp ${CI_IDENTITIES_URI} ./ci-identities-gitlab-job-client
     - chmod u+x ./ci-identities-gitlab-job-client
-    # - ./ci-identities-gitlab-job-client secrets read "helm-plugin-gpg" "key"
     - go install github.com/DataDog/software-integrity-and-trust/sint-4674-helm-plugin-build-and-release/cmd/cli@${PACKAGER_REVISION}
     - $GOPATH/bin/cli --help
-    - $GOPATH/bin/cli export-public-key --vault-key crypto/ci/keys/datadog_helm-plugin_untrusted-jobs_helm-plugin-testing-signing-key --user-id "DataDog, Inc." --user-email "package+helm@datadoghq.com" > public-key.pub
-    - PACKAGER=$GOPATH/bin/cli make package-ci
+    - ./ci-identities-gitlab-job-client vault env -- $GOPATH/bin/cli export-public-key --vault-key crypto/ci/keys/datadog_helm-plugin_untrusted-jobs_helm-plugin-testing-signing-key --user-id "DataDog, Inc." --user-email "package+helm@datadoghq.com" > public-key.pub
+    - cat public-key.pub
+    - PACKAGER=$GOPATH/bin/cli ./ci-identities-gitlab-job-client vault env -- make package-ci
