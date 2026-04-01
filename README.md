@@ -41,7 +41,7 @@ Install latest version from main branch:
 
 `helm plugin install https://github.com/DataDog/helm-plugin`
 
-# Debugging the instalation
+# Debugging the installation
 
 If you have issues installing the plugin you can debug it by
 addind environment variable: `HELM_DEBUG=1`
@@ -56,3 +56,5 @@ be done just by adding a call to the plugin:
 Regular Helm call:      `helm install <release> <chart/path> <flags>`
 
 Helm call using plugin: `helm datadog <plugin flags> install <release> <chart/path> <flags>`
+
+Helm plugins cannot be enabled by default. However, you can make the experience more seamless by defining an alias: `alias helm=helm datadog`
