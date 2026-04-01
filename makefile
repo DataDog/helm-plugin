@@ -99,9 +99,9 @@ clean: ## Clean local binaries
 
 package-ci:
 	$(PACKAGER) package ./plugins/datadog \
-	--vault-key my-transit-engine/keys/plugin-signing-key \
-	--user-id "DataDog, Inc." \
-	--user-email "package+helm@datadoghq.com" \
+	--vault-key $(SIGN_KEY_PATH) \
+	--user-id $(SIGN_USER) \
+	--user-email $(SIGN_EMAIL) \
 	--output ./dist
 
 help:
