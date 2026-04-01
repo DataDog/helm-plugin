@@ -98,11 +98,12 @@ clean: ## Clean local binaries
 	@rm -rf ./plugins/datadog-post-renderer/bin
 
 package-ci:
-	$(PACKAGER) package ./plugins/datadog \
-	--vault-key $(SIGN_KEY_PATH) \
-	--user-id $(SIGN_USER) \
-	--user-email $(SIGN_EMAIL) \
-	--output ./dist
+	rm -rf $(HELM4_PLUGIN_PATH)/datadog/scripts
+	cp -a scripts $(HELM4_PLUGIN_PATH)/datadog
+	rm -rf $(HELM4_PLUGIN_PATH)/datadog-post-renderer/scripts
+	cp -a scripts $(HELM4_PLUGIN_PATH)/datadog-post-renderer
+	$(PACKAGER) package ./plugins/datadog --vault-key "$(SIGN_KEY_PATH)" --user-id "$(SIGN_USER)" --user-email "$(SIGN_EMAIL)"
+	$(PACKAGER) package ./plugins/datadog-post-renderer --vault-key "$(SIGN_KEY_PATH)" --user-id "$(SIGN_USER)" --user-email "$(SIGN_EMAIL)"
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'

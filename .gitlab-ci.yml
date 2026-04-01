@@ -28,6 +28,7 @@ variables:
   SIGN_KEY_PATH: crypto/ci/keys/datadog_helm-plugin_untrusted-jobs_helm-plugin-testing-signing-key
   SIGN_USER: "DataDog, Inc."
   SIGN_EMAIL: "package+helm@datadoghq.com"
+  SIGN_PUB_KEY: datadog-helm-key.pub
 
 .go-cache:
   cache:
@@ -56,7 +57,6 @@ test-all:
 package:
   variables:
     VAULT_ADDR: "https://vault.us1.ddbuild.io"
-    # VAULT_TOKEN: "!!!!!!!"
   id_tokens:
     CI_IDENTITIES_GITLAB_ID_TOKEN:
       aud: ci-identities
@@ -65,11 +65,16 @@ package:
   before_script:
       - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/".insteadOf "https://github.com/DataDog/"
       - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -s -- --version v4.1.0
+      - aws s3 cp ${CI_IDENTITIES_URI} ./ci-identities-gitlab-job-client
+      - chmod u+x ./ci-identities-gitlab-job-client
+      - go install github.com/DataDog/software-integrity-and-trust/sint-4674-helm-plugin-build-and-release/cmd/cli@${PACKAGER_REVISION}
   script:
-    - aws s3 cp ${CI_IDENTITIES_URI} ./ci-identities-gitlab-job-client
-    - chmod u+x ./ci-identities-gitlab-job-client
-    - go install github.com/DataDog/software-integrity-and-trust/sint-4674-helm-plugin-build-and-release/cmd/cli@${PACKAGER_REVISION}
-    - $GOPATH/bin/cli --help
-    - ./ci-identities-gitlab-job-client vault env -- $GOPATH/bin/cli export-public-key --vault-key ${SIGN_KEY_PATH} --user-id ${SIGN_USER} --user-email ${SIGN_EMAIL} > public-key.pub
-    - cat public-key.pub
+    - ./ci-identities-gitlab-job-client vault env -- $GOPATH/bin/cli export-public-key --vault-key "${SIGN_KEY_PATH}" --user-id "${SIGN_USER}" --user-email "${SIGN_EMAIL}" > ${SIGN_PUB_KEY}
     - PACKAGER=$GOPATH/bin/cli ./ci-identities-gitlab-job-client vault env -- make package-ci
+    - ls -la
+
+  artifacts:
+    paths:
+      - datadog-*.tgz
+      - datadog-*.tgz.prov
+      - datadog-helm-key.pub
