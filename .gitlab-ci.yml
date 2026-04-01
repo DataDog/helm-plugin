@@ -61,6 +61,7 @@ package:
   image: $CI_IMAGE_GBI_JAMMY
   before_script:
       - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/".insteadOf "https://github.com/DataDog/"
+      - curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -s -- --version v4.1.0
   script:
     - aws s3 cp ${CI_IDENTITIES_URI} ./ci-identities-gitlab-job-client
     - chmod u+x ./ci-identities-gitlab-job-client
