@@ -24,8 +24,9 @@ TEST_TMP_DIR="${SCRIPT_DIR}/tmp"
 # TEST_CHARTS_DIR="${TEST_TMP_DIR}/charts"
 TEST_REFS_DIR="${SCRIPT_DIR}/references"
 
-# Get current git hash for substitution in expected files
+# Get current git hash and repo URL for substitution in expected files
 CURRENT_GIT_HASH=$(cd "${REPO_ROOT}" && git rev-parse HEAD)
+CURRENT_REPO_URL=$(cd "${REPO_ROOT}" && git remote get-url origin | sed 's/\.git$//' | sed 's/^http\:/https\:/')
 
 # Stop execution on any error
 trap "cleanup" EXIT
@@ -68,8 +69,9 @@ prepare_expected_file() {
     local dest_file=$2
     local plugin_version=$3
 
-    # Replace targetRevision with current git hash, then replace plugin version
-    sed "s/\"targetRevision\":\"[^\"]*\"/\"targetRevision\":\"${CURRENT_GIT_HASH}\"/" "${source_file}" | \
+    # Replace targetRevision with current git hash, repoURL with current remote URL, then replace plugin version
+    sed "s|\"targetRevision\":\"[^\"]*\"|\"targetRevision\":\"${CURRENT_GIT_HASH}\"|" "${source_file}" | \
+        sed "s|\"repoURL\":\"[^\"]*\"|\"repoURL\":\"${CURRENT_REPO_URL}\"|" | \
         sed "s/v3\/[0-9.][0-9.]*/v3\/${plugin_version}/g; s/v4\/[0-9.][0-9.]*/v4\/${plugin_version}/g" > "${dest_file}"
 }
 
